@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:rel="stylesheet"
+	th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.min.css}" />
+<meta charset="UTF-8">
+<title>new-Turma</title>
+</head>
+<body>
+	<div th:insert="~{/layout/navbar :: navbar}"></div>
+	<!-- <div class="container-fluid mb-5">
+		<nav class="navbar fixed-top navbar-dark bg-primary mb-5">
+			<h2 class="text-light">PROJETO PROGRAMAÇÃO WEB I - Ocorrências</h2>
+			<div class="navbar sticky-top" id="navbarNavAltMarkup">
+				<div class="navbar sticky-top">
+					<br> <a class="nav-item nav-link active text-light"
+						th:href="@{/turma}">Turma <span class="sr-only">(current)</span></a>
+					<a class="nav-item nav-link active text-light" th:href="@{/aluno}">Aluno
+						<span class="sr-only">(current)</span>
+					</a> <a class="nav-item nav-link active text-light"
+						th:href="@{/ocorrencia}">Ocorrência <span class="sr-only">(current)</span>
+					</a>
+				</div>
+			</div>
+		</nav>
+	</div> -->
+	<div class="container-fluid mt-5">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card mt-5">
+					<h5 th:if="${aluno.matricula==null}" class="card-header">Criar novo aluno</h5>
+					<h5 th:unless="${aluno.matricula==null}" class="card-header">Editar aluno</h5>
+					<div class="card-body">
+
+						<form th:action="@{/aluno}" method="post" th:object="${aluno}">
+							<div class="form-group">
+							<input type="hidden" th:if="*{matricula}" name="edit" value="editando">
+								<label for="matricula">Matrícula</label> <input type="text"
+									id="matricula" name="matricula" th:field="*{matricula}"
+									placeholder="matrícula" class="form-control" /> <label
+									for="nome">Nome</label> <input type="text" id="nome"
+									name="nome" th:field="*{nome}" placeholder="nome"
+									class="form-control" /> <label for="anoNascimento">Ano
+									de nascimento</label> <input type="text" id="anoNascimento"
+									name="anoNascimento" th:field="*{anoNascimento}"
+									placeholder="1932" class="form-control" /> <label
+									for="telefone">Telefone</label> <input type="text"
+									id="telefone" name="telefone" th:field="*{telefone}"
+									placeholder="" class="form-control" /> <label for="email">E-mail</label>
+								<input type="text" id="email" name="email" th:field="*{email}"
+									placeholder="" class="form-control" /> 
+								
+								<label for="turma">Turma</label>
+									<select th:if="${aluno.turma}"  id="turma" class="form-control" name="codigo">
+									<option th:each="turma : ${turmas}" th:selected="${aluno.turma.codigo}" th:text="${turma.codigo}">Turma</option>
+								</select>
+									<select th:unless="${aluno.turma}"  id="turma" class="form-control" name="codigo">
+									<option th:each="turma : ${turmas}" th:text="${turma.codigo}">Turma</option>
+								</select>
+
+								<div class="mt-2">
+									<button th:unless="${aluno.matricula}" type="submit" class="btn btn-primary">Salvar</button>
+									<button th:if="${aluno.matricula}" type="submit" class="btn btn-primary">Atualizar</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Footer -->
+	<footer class="page-footer font-small blue">
+		<!-- Copyright -->
+		<div class="footer-copyright text-center py-5 mt-5">
+			© 2020 Copyright: José Ricardo Quintino Vidal<br> <a
+				th:href="@{/}">Início</a>
+		</div>
+		<!-- Copyright -->
+	</footer>
+	<!-- Footer -->
+</body>
+</html>

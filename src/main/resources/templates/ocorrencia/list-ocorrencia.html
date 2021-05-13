@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:rel="stylesheet"
+	th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.min.css}" />
+<meta charset="UTF-8">
+<title>List-Ocorrência</title>
+</head>
+<body>
+	<div th:insert="~{/layout/navbar :: navbar}"></div>
+	<!-- <div class="container-fluid mb-5">
+		<nav class="navbar fixed-top navbar-dark bg-primary mb-5">
+			<h2 class="text-light">PROJETO PROGRAMAÇÃO WEB I -
+				Ocorrências</h2>
+			<div class="navbar sticky-top" id="navbarNavAltMarkup">
+				<div class="navbar sticky-top">
+					<br> <a class="nav-item nav-link active text-light"
+						th:href="@{/turma}">Turma <span class="sr-only">(current)</span></a>
+					<a class="nav-item nav-link active text-light" th:href="@{/aluno}">Aluno
+						<span class="sr-only">(current)</span>
+					</a> <a class="nav-item nav-link active text-light"
+						th:href="@{/ocorrencia}">Ocorrência <span class="sr-only">(current)</span>
+					</a>
+				</div>
+			</div>
+		</nav>
+	</div> -->
+	<div class="container-fluid mt-5">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card mt-5">
+					<h5 class="card-header">Lista das Ocorrências</h5>
+					<div class="card-body">
+					
+					<div th:if="${msg1}" class="alert alert-warning" role="alert" th:text="${msg1}"> </div>
+					<div th:if="${msg2}" class="alert alert-success" role="alert" th:text="${msg2}"> </div>
+					<div th:if="${msg3}" class="alert alert-info" role="alert" th:text="${msg3}"> </div>
+					
+						<table class="table table-success table-striped">
+							<tr>
+								<th>Título</th>
+								<th>Descrição</th>
+								<th>Data e hora</th>
+								<th>Aluno</th>
+								<th>Status</th>
+								<th></th>
+								<th>Ações</th>
+								<th></th> 
+							</tr>
+							<tr th:each="ocorrencia : ${ocorrencias}" th:object="${ocorrencia}">
+								<td th:text="${ocorrencia.titulo}">off-line</td>
+								<td th:text="${ocorrencia.descricao}">off-line</td>
+								<td th:text="*{#calendars.format(dataHora,'dd MM yy HH:mm')}">off-line</td>
+								<td th:text="${ocorrencia.aluno}">off-line</td>
+								<td th:text="${ocorrencia.status}">off-line</td>
+								<td><a class="btn btn-primary" th:href="@{ocorrencia/mostrar/__${ocorrencia.id}__}">Mostrar</a></td>
+								<td><a class="btn btn-primary" th:href="@{ocorrencia/editar/__${ocorrencia.id}__}">Editar</a></td>
+								<td><a class="btn btn-primary" th:href="@{ocorrencia/deletar/__${ocorrencia.id}__}" onClick="return confirm	('Tem certeza que deseja excluir a ocorrência selecionada?')">Excluir</a></td>
+							</tr>
+						</table>
+						<div class="mb-2">
+							<a th:href="@{/ocorrencia/nova}" class="btn btn-primary">Nova ocorrência</a>
+							<a th:unless="${session.usuario.papel!='Administrador'}" th:href="@{/usuario}" class="btn btn-primary">Usuário</a>
+							
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Footer -->
+	<footer class="page-footer font-small blue">
+		<!-- Copyright -->
+		<div class="footer-copyright text-center py-5 mt-5">
+			© 2020 Copyright: José Ricardo Quintino Vidal<br> <a
+				th:href="@{/}">Início</a>
+		</div>
+		<!-- Copyright -->
+	</footer>
+	<!-- Footer -->
+</body>
+</html>

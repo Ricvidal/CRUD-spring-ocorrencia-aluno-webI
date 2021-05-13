@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:rel="stylesheet"
+	th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.min.css}" />
+<meta charset="UTF-8">
+<title>Detalhe-Aluno</title>
+</head>
+<body>
+	<div th:insert="~{/layout/navbar :: navbar}"></div>
+	<!-- <div class="container-fluid mb-5">
+		<nav class="navbar fixed-top navbar-dark bg-primary mb-5">
+			<h2 class="text-light">PROJETO PROGRAMAÇÃO WEB I - Ocorrências</h2>
+			<div class="navbar sticky-top" id="navbarNavAltMarkup">
+				<div class="navbar sticky-top">
+					<br> <a class="nav-item nav-link active text-light"
+						th:href="@{/turma}">Turma <span class="sr-only">(current)</span></a>
+					<a class="nav-item nav-link active text-light" th:href="@{/aluno}">Aluno
+						<span class="sr-only">(current)</span>
+					</a> <a class="nav-item nav-link active text-light"
+						th:href="@{/ocorrencia}">Ocorrência <span class="sr-only">(current)</span>
+					</a>
+				</div>
+			</div>
+		</nav>
+	</div> -->
+	<div class="container-fluid mt-5">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card mt-5">
+					<h5 class="card-header">DETALHES DO ALUNO</h5>
+					<div class="card-body">
+						<table class="table table-success table-striped">
+							<tr>
+								<th>MATRÍCULA</th>
+								<th>NOME</th>
+								<th>ANO DE NASCIMENTO</th>
+								<th>TELEFONE</th>
+								<th>E-MAIL</th>
+								<th>TURMA</th>
+								<th>OCORRENCIAS</th>
+
+							</tr>
+							<tr>
+								<td th:text="${aluno.matricula}">off-line</td>
+								<td th:text="${aluno.nome}">off-line</td>
+								<td th:text="${aluno.anoNascimento}">off-line</td>
+								<td th:text="${aluno.telefone}">off-line</td>
+								<td th:text="${aluno.email}">off-line</td>
+								<td th:text="${aluno.turma}">off-line</td>
+								<td><span th:text="${#lists.size(aluno.ocorrencias)}"></span></td>
+							</tr>
+						</table>
+						<table class="table table-warning table-striped">
+							<tr>
+								<!-- <th>Id</th> -->
+								<th>Título</th>
+								<th>Descrição</th>
+								<th>Data e Hora</th>
+								<th>Status</th>
+
+							</tr>
+
+							<tr th:each="ocorrencia: ${aluno.ocorrencias}" th:object="${ocorrencia}">
+
+								<!-- <td th:text="${ocorrencia.id}">off-line</td> -->
+								<td th:text="${ocorrencia.titulo}">off-line</td>
+								<td th:text="${ocorrencia.descricao}">off-line</td>
+								<td th:text="*{#calendars.format(dataHora,'dd MM yy HH:mm')}">off-line</td>
+								<td th:text="${ocorrencia.status}">off-line</td>							</tr>
+						</table>
+
+						<div class="mb-2">
+							<a th:href="@{/aluno}" class="btn btn-primary">Listar Aluno</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Footer -->
+	<footer class="page-footer font-small blue">
+		<!-- Copyright -->
+		<div class="footer-copyright text-center py-5 mt-5">
+			© 2020 Copyright: José Ricardo Quintino Vidal<br> <a
+				th:href="@{/}">Início</a>
+		</div>
+		<!-- Copyright -->
+	</footer>
+	<!-- Footer -->
+</body>
+</html>

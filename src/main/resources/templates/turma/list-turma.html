@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:rel="stylesheet"
+	th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.min.css}" />
+<meta charset="UTF-8">
+<title>List-Turma</title>
+</head>
+<body>
+ 	<div th:insert="~{/layout/navbar :: navbar}"></div>
+	<!-- <div class="container-fluid mb-5">
+		<nav class="navbar fixed-top navbar-dark bg-primary mb-5">
+			<h2 class="text-light">PROJETO PROGRAMAÇÃO WEB I - Ocorrências</h2>
+			<div class="navbar sticky-top" id="navbarNavAltMarkup">
+				<div class="navbar sticky-top">
+					<br> <a class="nav-item nav-link active text-light"
+						th:href="@{/turma}">Turma <span class="sr-only">(current)</span></a>
+					<a class="nav-item nav-link active text-light" th:href="@{/aluno}">Aluno
+						<span class="sr-only">(current)</span>
+					</a> <a class="nav-item nav-link active text-light"
+						th:href="@{/ocorrencia}">Ocorrência <span class="sr-only">(current)</span>
+					</a>
+				</div>
+			</div>
+		</nav>
+	</div> -->
+
+	<div class="container-fluid mt-5">
+		<div class="row">
+			<div class="col-sm-12">
+
+				<div class="card mt-5">
+					<h5 class="card-header">Lista dos cursos</h5>
+					<div class="card-body">
+						<!--<h3 class="font-small blue" th:text="${msg}" ></h3>-->
+					<div th:if="${msg1}" class="alert alert-warning" role="alert" th:text="${msg1}"> </div>
+					<div th:if="${msg2}" class="alert alert-success" role="alert" th:text="${msg2}"> </div>
+					<div th:if="${msg3}" class="alert alert-info" role="alert" th:text="${msg3}"> </div>
+						<table class="table table-success table-striped">
+							<tr>
+
+								<th>Código</th>
+								<th>Nome</th>
+								<th>Ano</th>
+								<th>Período</th>
+								<!-- Os alunos só serão listados em "show-turma" -->
+								<!-- <th>Aluno</th>-->
+								<th></th>
+								<th>Ações</th>
+								<th></th>
+							</tr>
+							<tr th:each="turma : ${turmas}">
+								<td th:text="${turma.codigo}">off-line</td>
+								<td th:text="${turma.nome}">off-line</td>
+								<td th:text="${turma.ano}">off-line</td>
+								<td th:text="${turma.periodo}">off-line</td>
+								<!-- Os alunos só serão listados em "show-turma" -->
+								<!--<td th:text="${turma.aluno}">off-line</td> -->
+								<td><a class="btn btn-primary"
+									th:href="@{turma/mostrar/__${turma.codigo}__}">Mostrar</a></td>
+								<td><a class="btn btn-primary"
+									th:href="@{turma/editar/__${turma.codigo}__}">Editar</a></td>
+								<td><a class="btn btn-primary"
+									th:href="@{turma/deletar/__${turma.codigo}__}"
+									onClick="return confirm	('Tem certeza que deseja excluir a turma selecionada?')">Deletar</a></td>
+
+							</tr>
+						</table>
+
+						<div class="mb-2">
+							<a th:href="@{/turma/nova}" class="btn btn-primary">Nova
+								turma</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Footer -->
+	<footer class="page-footer font-small blue">
+		<!-- Copyright -->
+		<div class="footer-copyright text-center py-5 mt-5">
+			© 2020 Copyright: José Ricardo Quintino Vidal<br> <a
+				th:href="@{/}">Início</a>
+		</div>
+		<!-- Copyright -->
+	</footer>
+	<!-- Footer -->
+
+</body>
+</html>

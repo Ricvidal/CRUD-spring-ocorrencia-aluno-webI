@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.min.css}" />
+<meta charset="UTF-8">
+<title>new-Turma</title>
+</head>
+<body>
+	<div th:insert="~{/layout/navbar :: navbar}"></div>
+	<div class="container-fluid mt-5">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card mt-5">
+					<h5 th:if="${usuario.email==null}" class="card-header">Criar novo usuário</h5>
+					<h5 th:unless="${usuario.email==null}" class="card-header">Editar usuário</h5>
+					
+					<div class="card-body">
+
+						<form th:action="@{/usuario}" method="post" th:object="${usuario}">
+						
+						<input type="hidden" th:if="*{email}" name="edit" value="editando"> 
+						
+							<div class="form-group">
+								<label
+									for="nome">Nome</label> <input type="text" id="nome"
+									name="nome" th:field="*{nome}" placeholder="nome"
+									class="form-control" /> <label for="email">E-mail</label> <input
+									type="text" id="email" name="email" th:field="*{email}"
+									placeholder="" class="form-control" /> 
+									<label
+									for="login">Login</label> <input type="text" id="login"
+									name="login" th:field="*{login}" placeholder=""
+									class="form-control" /><label
+									for="senha">Senha</label> <input type="text" id="senha"
+									name="senha" th:field="*{senha}" placeholder=""
+									class="form-control" />
+									<label
+									for="papel">Papel</label> <input type="text" id="papel"
+									name="papel" th:field="*{papel}" placeholder=""
+									class="form-control" />
+
+								<div class="mt-2">
+									<button th:unless="${usuario.email}" type="submit" class="btn btn-primary">Salvar</button>
+									<button th:if="${usuario.email}" type="submit" class="btn btn-primary">Atualizar</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Footer -->
+	<!-- Footer -->
+	<footer class="page-footer font-small blue">
+		<!-- Copyright -->
+		<div class="footer-copyright text-center py-5 mt-5">
+			© 2020 Copyright: José Ricardo Quintino Vidal<br> <a
+				th:href="@{/}">Início</a>
+		</div>
+		<!-- Copyright -->
+	</footer>
+	<!-- Footer -->
+</body>
+</html>

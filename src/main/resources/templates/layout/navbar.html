@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:rel="stylesheet"
+	th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.min.css}" />
+<meta charset="UTF-8">
+<title>List-Ocorrência</title>
+</head>
+<body>
+    <div th:fragment="navbar">
+	<div class="container-fluid mb-5">
+		<nav class="navbar fixed-top navbar-dark bg-primary mb-5">
+			<h2 class="text-light">PROJETO PROGRAMAÇÃO WEB I -
+				Ocorrências</h2>
+			<div class="navbar sticky-top" id="navbarNavAltMarkup">
+				<div class="navbar sticky-top">
+				<div class="nav-item nav-link active text-light" th:if="${session.usuario}">
+					Olá, <span th:text="${session.usuario.nome}"></span>!
+					<a class="text-light"th:href="@{/logout}">( Sair )</a>
+					</div>
+					<br> 
+					<a class="nav-item nav-link active text-light"
+						th:href="@{/turma}">Turma <span class="sr-only">(current)</span></a>
+					<a class="nav-item nav-link active text-light" th:href="@{/aluno}">Aluno
+						<span class="sr-only">(current)</span>
+					</a> <a class="nav-item nav-link active text-light"
+						th:href="@{/ocorrencia}">Ocorrência <span class="sr-only">(current)</span>
+					</a>
+					
+				</div>
+			</div>
+		</nav>
+	</div>
+	</div>
+	</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:rel="stylesheet"
+	th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.min.css}" />
+<meta charset="UTF-8">
+<title>List-Turma</title>
+</head>
+<body>
+ 	<div th:insert="~{/layout/navbar :: navbar}"></div>
+ 	<div class="container-fluid mt-5">
+		<div class="row">
+			<div class="col-sm-12">
+
+				<div class="card mt-5">
+					<h5 class="card-header">Lista de usuários</h5>
+					<div class="card-body">
+						<!--<h3 class="font-small blue" th:text="${msg}" ></h3>-->
+					<div th:if="${msg1}" class="alert alert-warning" role="alert" th:text="${msg1}"> </div>
+					<div th:if="${msg2}" class="alert alert-success" role="alert" th:text="${msg2}"> </div>
+					<div th:if="${msg3}" class="alert alert-info" role="alert" th:text="${msg3}"> </div>
+						<table class="table table-success table-striped">
+							<tr>
+								<th>Nome</th>
+								<th>E-mail</th>
+								<th>Login</th>
+								<th>Senha</th>
+								<th>Papel</th>
+							</tr>
+							<tr th:each="usuario : ${usuarios}">
+								<td th:text="${usuario.nome}">off-line</td>
+								<td th:text="${usuario.email}">off-line</td>
+								<td th:text="${usuario.login}">off-line</td>
+								<td th:text="${usuario.senha}">off-line</td>
+								<td th:text="${usuario.papel}">off-line</td>
+								<td><a class="btn btn-primary"
+									th:href="@{usuario/editar/__${usuario.email}__}">Editar</a></td>
+								<td><a class="btn btn-primary"
+									th:href="@{usuario/deletar/__${usuario.email}__}"
+									onClick="return confirm	('Tem certeza que deseja excluir o usuário selecionado?')">Deletar</a></td>
+
+							</tr>
+						</table>
+
+						<div class="mb-2">
+							<a th:href="@{/usuario/novo}" class="btn btn-primary">Novo
+								usuário</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Footer -->
+	<footer class="page-footer font-small blue">
+		<!-- Copyright -->
+		<div class="footer-copyright text-center py-5 mt-5">
+			© 2020 Copyright: José Ricardo Quintino Vidal<br> <a
+				th:href="@{/}">Início</a>
+		</div>
+		<!-- Copyright -->
+	</footer>
+	<!-- Footer -->
+
+</body>
+</html>

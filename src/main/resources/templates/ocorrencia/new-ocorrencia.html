@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link th:rel="stylesheet"
+	th:href="@{/webjars/bootstrap/4.5.3/css/bootstrap.min.css}" />
+<meta charset="UTF-8">
+<title>new-Ocorrência</title>
+</head>
+<body>
+	<div th:insert="~{/layout/navbar :: navbar}"></div>
+	<!-- <div class="container-fluid mb-5">
+		<nav class="navbar fixed-top navbar-dark bg-primary mb-5">
+			<h2 class="text-light">PROJETO PROGRAMAÇÃO WEB I - Ocorrências</h2>
+			<div class="navbar sticky-top" id="navbarNavAltMarkup">
+				<div class="navbar sticky-top">
+					<br> <a class="nav-item nav-link active text-light"
+						th:href="@{/turma}">Turma <span class="sr-only">(current)</span></a>
+					<a class="nav-item nav-link active text-light" th:href="@{/aluno}">Aluno
+						<span class="sr-only">(current)</span>
+					</a> <a class="nav-item nav-link active text-light"
+						th:href="@{/ocorrencia}">Ocorrência <span class="sr-only">(current)</span>
+					</a>
+				</div>
+			</div>
+		</nav>
+		 
+	</div> -->
+	<div class="container-fluid mt-5">
+		<div class="row">
+			<div class="col-sm-12">
+				<div class="card mt-5">
+					<h5 th:if="${ocorrencia.id==null}" class="card-header">Nova ocorrência</h5>
+					<h5 th:unless="${ocorrencia.id==null}" class="card-header">Editar ocorrência</h5>
+					<div class="card-body">
+						<form th:action="@{/}" method="post" th:object="${ocorrencia}">
+							
+							<input type="hidden" th:if="*{id}" name="edit" value="editando"> 
+							
+							
+							<div class="form-group">
+							
+								<label for="id"></label> 
+								<input type="text" id="id" name="id" th:field="*{id}" placeholder="" class="form-control" readonly/> 
+							
+
+								<label for="titulo">Título</label> 
+								<input type="text" id="titulo" name="titulo" th:field="*{titulo}" placeholder="" class="form-control" /> 
+										
+								<label for="descricao">Descrição</label>
+								<textarea id="descricao" name="descricao" th:field="*{descricao}" rows="4" cols="50" class="form-control"/> 
+								
+								<label for="dataHora">Data e hora</label> 
+								<input type="datetime-local" id="data" name="data" th:field="*{dataHora}" placeholder="" class="form-control" />
+
+								<label for="status">Status</label> 
+								<select id="status" name="status" class="form-control">
+									<option th:each="st :${listarStatus}" th:value="${st}" th:text="${st}">Status</option>
+								</select>	
+								
+								<label for="aluno">Aluno</label> 
+								<select id="aluno" name="matricula" class="form-control" >
+									<option th:each="aluno : ${alunos}" th:value="${aluno.matricula}" th:text="${aluno}"></option>
+								</select> 
+
+								<div class="mt-2">
+									<button th:unless="${ocorrencia.id}" type="submit" class="btn btn-primary">Salvar</button>
+									<button th:if="${ocorrencia.id}" type="submit" class="btn btn-primary">Atualizar</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Footer -->
+	<footer class="page-footer font-small blue">
+		<!-- Copyright -->
+		<div class="footer-copyright text-center py-5 mt-5">
+			© 2020 Copyright: José Ricardo Quintino Vidal<br> <a
+				th:href="@{/}">Início</a>
+		</div>
+		<!-- Copyright -->
+	</footer>
+	<!-- Footer -->
+</body>
+</html>
